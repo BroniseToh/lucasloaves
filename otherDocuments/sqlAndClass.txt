@@ -1,0 +1,126 @@
+/************SQL COMMANDS*******************************/
+
+//BEGIN: RETRIEVE BREAD MAKING CLASS
+SELECT ProductNumber, ProductName, UnitPrice, ProductImage
+  FROM PRODUCT
+ WHERE productNumber = 5;
+//END: RETRIEVE BREAD MAKING CLASS
+
+//BEGIN: Adding to sales order table
+INSERT INTO SALESORDER(OrderDate
+                      ,CustomerFirstname
+                      ,CustomerLastname
+                      ,CustomerEmail
+                      ,CustomerPhone
+                      ,CreditCardNumber
+                      ,CardExpiryDate
+                      ,SecurityCode
+                      ,PaymentAmount
+                      )
+            VALUES(NOW()
+                  ,'John'
+                  ,'Doe'
+                  ,'johnbDoe@email.com'
+                  ,'0412345678'
+                  ,'1234567891011121'
+                  ,'08/26'
+                  ,'123'
+                  ,10.00
+            )
+//END: Adding to sales order table            
+
+//BEGIN: Adding to order line table
+INSERT INTO ORDERLINE(ProductNumber
+                     ,OrderNumber
+                     ,QuantityOrdered
+                     ,PickUpDate
+                     ,TotalAmount
+                     )
+               VALUES(1, 1, 2, '2022-08-11 13:15:00', 14)
+                    ,(2, 1, 2, '2022-08-11 13:15:00', 16)
+                    ,(3, 1, 1, '2022-08-11 13:15:00', 9)
+//END: Adding to order line table                    
+
+//BEGIN: Display items bought
+SELECT pro.ProductName
+      ,pro.UnitPrice
+      ,ord.QuantityOrdered
+      ,ord.TotalAmount
+      ,ord.PickUpDate
+   FROM SALESORDER AS sal
+  INNER JOIN ORDERLINE AS ord
+     ON sal.OrderNumber = ord.OrderNumber
+  INNER JOIN PRODUCT AS pro
+     ON ord.ProductNumber = pro.ProductNumber
+  WHERE sal.OrderNumber = 1
+//END: Display items bought
+
+//BEGIN: Display order details
+SELECT OrderNumber
+      ,CONCAT(CustomerFirstname,' ', CustomerLastname) AS CustomerName
+      ,OrderDate
+FROM SALESORDER
+WHERE OrderNumber = 1
+//END: Display order details
+
+//BEGIN: Add an applicant to the applicant table
+INSERT INTO APPLICANT(ApplicantFirstname
+                     , ApplicantLastname
+                     , ApplicantEmail
+                     , ApplicantPhone
+                     )
+               VALUES ("John"
+                     , "Doe"
+                     , "johndoe@email.com"
+                     , "123")
+//END: Add an applicant to the applicant table                     
+
+//BEGIN: Add job application to the applicantline table
+INSERT INTO APPLICATIONLINE(PostNumber
+                     , ApplicantNumber
+                     , Resume
+                     , CoverLetter
+                     )
+               VALUES (1
+                     , 1"
+                     , "resume.txt"
+                     , "coverLetter.txt")
+//END: Add job application to the applicantline table   
+
+//BEGIN: Create order item class
+<?php
+class OrderItem{
+  public $productNumber
+        ,$productName
+        ,$unitPrice
+        ,$totalAmount
+        ,$quantityOrdered
+        ,$pickUpDate
+        ,$pickUpTime
+        ,$image
+        ;
+
+  function __construct($productNumber
+                      ,$productName
+                      ,$unitPrice
+                      ,$totalAmount
+                      ,$quantityOrdered
+                      ,$pickUpDate
+                      ,$pickUpTime
+                      ,$image
+      )
+  {
+    $this->productNumber = $productNumber;
+    $this->productName = $productName;
+    $this->unitPrice = $unitPrice;
+    $this->totalAmount = $totalAmount;
+    $this->quantityOrdered = $quantityOrdered;
+    $this->pickUpDate = $pickUpDate;
+    $this->pickUpTime = $pickUpTime;
+    $this->image = $image;
+  }//function __construct
+
+}//$orderItemclass OrderItem
+ ?>
+
+ //END: Create order item class

@@ -1,0 +1,33 @@
+.imageContainer{order: 1;}
+
+.img-thumbnail{
+  width: 100px;
+  height: auto;
+  padding: 0;
+}
+
+.textDescription{
+  background-color: #e6e6e6;
+  padding: 10% 5%;
+  text-align: center;
+  order: 2;
+}
+
+.textDescription ul{
+  list-style-type: none;
+  padding:0;
+}
+
+.breadMakingClassVideo{
+  height: 67.5vh;
+  width: 90vw;
+  padding: 2%;
+}
+@media (min-width: 768px){
+  .imageContainer{order: 0;}
+
+  .textDescription{
+    order: 0;
+  }
+
+}/* @media (min-width: 768px) */
